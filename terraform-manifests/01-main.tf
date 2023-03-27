@@ -29,7 +29,7 @@ terraform {
 # Terraform State Storage to Azure Storage Container
   backend "azurerm" {
     resource_group_name   = "devops-resource-group"
-    storage_account_name  = "terraformazureaks_1679941407264"
+    storage_account_name  = "terraformazureaks"
     container_name        = "tfstatefiles"
     key                   = "terraform-custom-vnet.tfstate"
   }  
