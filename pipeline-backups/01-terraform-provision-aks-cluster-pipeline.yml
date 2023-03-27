@@ -40,7 +40,7 @@ stages:
           backendType: 'azurerm'
           backendServiceArm: 'terraform-aks-azurerm-svc-con'
           backendAzureRmResourceGroupName: 'devops-resource-group'
-          backendAzureRmStorageAccountName: 'terraformazureaks_1679941407264'
+          backendAzureRmStorageAccountName: 'terraformazureaks'
           backendAzureRmContainerName: 'tfstatefiles'
           backendAzureRmKey: 'aks-base.tfstate'
           allowTelemetryCollection: false
@@ -83,7 +83,7 @@ stages:
                 backendType: 'azurerm'
                 backendServiceArm: 'terraform-aks-azurerm-svc-con'
                 backendAzureRmResourceGroupName: 'devops-resource-group'
-                backendAzureRmStorageAccountName: 'terraformazureaks_1679941407264'
+                backendAzureRmStorageAccountName: 'terraformazureaks'
                 backendAzureRmContainerName: 'tfstatefiles'
                 backendAzureRmKey: 'aks-$(DEV_ENVIRONMENT).tfstate'
                 allowTelemetryCollection: false
@@ -134,7 +134,7 @@ stages:
                 backendType: 'azurerm'
                 backendServiceArm: 'terraform-aks-azurerm-svc-con'
                 backendAzureRmResourceGroupName: 'devops-resource-group'
-                backendAzureRmStorageAccountName: 'terraformazureaks_1679941407264'
+                backendAzureRmStorageAccountName: 'terraformazureaks'
                 backendAzureRmContainerName: 'tfstatefiles'
                 backendAzureRmKey: 'aks-$(QA_ENVIRONMENT).tfstate'
                 allowTelemetryCollection: false
