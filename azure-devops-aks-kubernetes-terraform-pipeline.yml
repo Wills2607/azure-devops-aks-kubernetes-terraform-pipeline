@@ -32,8 +32,8 @@ stages:
           workingDirectory: '$(System.DefaultWorkingDirectory)/terraform-manifests'
           backendType: 'azurerm'
           backendServiceArm: 'terraform-aks-azurerm-svc-con'
-          backendAzureRmResourceGroupName: 'terraform-storage-rg'
-          backendAzureRmStorageAccountName: 'terraformstatexlrwdrzs'
+          backendAzureRmResourceGroupName: 'devops-resource-group'
+          backendAzureRmStorageAccountName: 'terraformazureaks_1679941407264'
           backendAzureRmContainerName: 'tfstatefiles'
           backendAzureRmKey: 'aks-base.tfstate'
           allowTelemetryCollection: false
