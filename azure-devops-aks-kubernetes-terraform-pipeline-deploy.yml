@@ -57,16 +57,25 @@ stages:
                 commandOptions: '-var ssh_public_key=$(sshkey.secureFilePath) -var environment=$(DEV_ENVIRONMENT) -out $(Pipeline.Workspace)/terraform-manifests-out/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
                 allowTelemetryCollection: false
 - stage: TerraformPlan
-  jobs:
-    - job: TerraformPlan
-      continueOnError: false
-      steps:
-      - task: TerraformCLI@0
-        displayName: Terraform Apply
-        inputs:
-          command: 'apply'
-          workingDirectory: '$(Pipeline.Workspace)/terraform-manifests-out'
-          environmentServiceName: 'terraform-aks-azurerm-svc-con'
-          commandOptions: '$(Pipeline.Workspace)/terraform-manifests-out/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
-          allowTelemetryCollection: false     
+  jobs: 
+  - job: ApproveRelease
+    timeoutInMinutes: 4320 # job times out in 3 days
+    pool: ubuntu-latest
+    steps:
+    - task: ManualValidation@0
+      timeoutInMinutes: 1440 # task times out in 1 day
+      inputs:
+        notifyUsers: 'robwill2024@gmail.com'
+        instructions: 'Please validate and approve deployment to prod'
+  - job: TerraformPlan
+    continueOnError: false
+    steps:
+    - task: TerraformCLI@0
+      displayName: Terraform Apply
+      inputs:
+        command: 'apply'
+        workingDirectory: '$(Pipeline.Workspace)/terraform-manifests-out'
+        environmentServiceName: 'terraform-aks-azurerm-svc-con'
+        commandOptions: '$(Pipeline.Workspace)/terraform-manifests-out/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
+        allowTelemetryCollection: false     
   
