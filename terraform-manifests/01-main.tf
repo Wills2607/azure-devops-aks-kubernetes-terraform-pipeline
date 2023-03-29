@@ -4,7 +4,7 @@
 # 2. Required Terraform Providers
 # 3. Terraform Remote State Storage with Azure Storage Account (last step of this section)
 # 2. Terraform Provider Block for AzureRM
-# 3. Terraform Resource Block: Define a Random Pet Resource
+# 3. Terraform Resource Block: Define a Random Pet Resource/tektutor/ansible-feb-2023/blob/main/Day1/AnsibleHighLevelArchitecture.png
 
 # 1. Terraform Settings Block
 terraform {
