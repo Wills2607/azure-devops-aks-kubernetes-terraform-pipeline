@@ -61,8 +61,8 @@ stages:
 
 - stage: DeployAKSClusters
   jobs:
-    - deployment: DeployDevAKSCluster
-      displayName: DeployDevAKSCluster
+    - deployment: DestroyDevAKSCluster
+      displayName: DestroyDevAKSCluster
       pool:
         vmImage: 'ubuntu-latest'
       environment: $(DEV_ENVIRONMENT)      
@@ -87,14 +87,14 @@ stages:
                 backendAzureRmContainerName: 'tfstatefiles'
                 backendAzureRmKey: 'aks-$(DEV_ENVIRONMENT).tfstate'
                 allowTelemetryCollection: false
-            - task: TerraformCLI@0
-              displayName: Terraform plan
-              inputs:
-                command: 'plan'
-                workingDirectory: '$(Pipeline.Workspace)/terraform-manifests-out'
-                environmentServiceName: 'terraform-aks-azurerm-svc-con'
-                commandOptions: '-var ssh_public_key=$(sshkey.secureFilePath) -var environment=$(DEV_ENVIRONMENT) -out $(Pipeline.Workspace)/terraform-manifests-out/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
-                allowTelemetryCollection: false
+            # - task: TerraformCLI@0
+            #   displayName: Terraform plan
+            #   inputs:
+            #     command: 'plan'
+            #     workingDirectory: '$(Pipeline.Workspace)/terraform-manifests-out'
+            #     environmentServiceName: 'terraform-aks-azurerm-svc-con'
+            #     commandOptions: '-var ssh_public_key=$(sshkey.secureFilePath) -var environment=$(DEV_ENVIRONMENT) -out $(Pipeline.Workspace)/terraform-manifests-out/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
+            #     allowTelemetryCollection: false
             - task: TerraformCLI@0
               displayName: Terraform destroy 
               inputs:
@@ -112,9 +112,9 @@ stages:
 ## Optional 
 ## Step-4: Terraform destroy
 
-    - deployment: DeployQAAKSCluster
-      dependsOn: DeployDevAKSCluster
-      displayName: DeployQAAKSCluster
+    - deployment: DestroyQAAKSCluster
+      dependsOn: DestroyDevAKSCluster
+      displayName: DestroyQAAKSCluster
       pool:
         vmImage: 'ubuntu-latest'
       environment: $(QA_ENVIRONMENT)      
@@ -139,14 +139,14 @@ stages:
                 backendAzureRmContainerName: 'tfstatefiles'
                 backendAzureRmKey: 'aks-$(QA_ENVIRONMENT).tfstate'
                 allowTelemetryCollection: false
-            - task: TerraformCLI@0
-              displayName: Terraform Plan
-              inputs:
-                command: 'plan'
-                workingDirectory: '$(Pipeline.Workspace)/terraform-manifests-out'
-                environmentServiceName: 'terraform-aks-azurerm-svc-con'
-                commandOptions: '-var ssh_public_key=$(sshkey.secureFilePath) -var environment=$(QA_ENVIRONMENT) -out $(Pipeline.Workspace)/terraform-manifests-out/$(QA_ENVIRONMENT)-$(Build.BuildId).out'
-                allowTelemetryCollection: false
+            # - task: TerraformCLI@0
+            #   displayName: Terraform Plan
+            #   inputs:
+            #     command: 'plan'
+            #     workingDirectory: '$(Pipeline.Workspace)/terraform-manifests-out'
+            #     environmentServiceName: 'terraform-aks-azurerm-svc-con'
+            #     commandOptions: '-var ssh_public_key=$(sshkey.secureFilePath) -var environment=$(QA_ENVIRONMENT) -out $(Pipeline.Workspace)/terraform-manifests-out/$(QA_ENVIRONMENT)-$(Build.BuildId).out'
+            #     allowTelemetryCollection: false
             - task: TerraformCLI@0
               displayName: Terraform destroy
               inputs:
