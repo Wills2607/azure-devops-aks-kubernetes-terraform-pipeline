@@ -109,6 +109,7 @@ stages:
 ## Step-1: Download Secure File
 ## Step-2: Terraform Initialize (State Storage to store in Azure Storage Account)
 ## Step-3: Terraform Plan 
+## Optional 
 ## Step-4: Terraform Apply
 
     - deployment: DeployQAAKSCluster
@@ -153,6 +154,4 @@ stages:
                 workingDirectory: '$(Pipeline.Workspace)/terraform-manifests-out'
                 environmentServiceName: 'terraform-aks-azurerm-svc-con'
                 commandOptions: '$(Pipeline.Workspace)/terraform-manifests-out/$(QA_ENVIRONMENT)-$(Build.BuildId).out'
-                allowTelemetryCollection: false
-
-                
+                allowTelemetryCollection: false 
